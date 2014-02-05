@@ -23,13 +23,6 @@ MainWindow::MainWindow(QWidget *parent) :
     //создаем сокет
     sock = new QTcpSocket(this); // сокет для опроса
 
-    //Читаем настройки
-    /*QSettings *settings = new QSettings("settings.ini",QSettings::IniFormat);
-    ip = settings->value("address/IP", "10.113.1.11").toString();
-    port = settings->value("address/PORT").toString().toShort();
-    */
-
-
     ui->ip_label->setText(ip);
     //соединяем сигналы и прочее
     state_old=""; // обнулили состояние
@@ -148,12 +141,12 @@ void MainWindow::ask_dio_status ()
     QByteArray ask_dio; // команда запроса состояний
 
     ask_dio.resize(6); // записываем в массив команду. Описание команды см в инструкции к MOXA 4100
-    ask_dio[0]=05;
-    ask_dio[1]=02;
-    ask_dio[2]=00;
-    ask_dio[3]=02;
-    ask_dio[4]=00;
-    ask_dio[5]=03;
+    ask_dio[0]=5;
+    ask_dio[1]=2;
+    ask_dio[2]=0;
+    ask_dio[3]=2;
+    ask_dio[4]=0;
+    ask_dio[5]=3;
 
     sock->write(ask_dio); // отправка запроса
 }

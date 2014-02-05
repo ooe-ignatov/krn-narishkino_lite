@@ -10,6 +10,9 @@
 
 void myMessageOutput(QtMsgType type, const char *msg)
  {
+    if (!QDir(qApp->applicationDirPath()+"/log").exists()) {
+        QDir().mkdir(qApp->applicationDirPath()+"/log/");
+    }
     QFile fMessFile(qApp->applicationDirPath() + "/log/" + QDate::currentDate().toString("dd.MM.yyyy") + ".log");
  if(!fMessFile.open(QIODevice::Append | QIODevice::Text)){
  return;
